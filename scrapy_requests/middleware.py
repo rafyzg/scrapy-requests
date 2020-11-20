@@ -1,12 +1,12 @@
-from scrapy.http import HtmlResponse
-from scrapy import signals
-from scrapy.spiders import Spider
-
-from requests_html import HTMLSession
-
-from .request import HtmlRequest
 import logging
 from typing import Union
+
+from requests_html import HTMLSession
+from scrapy import signals
+from scrapy.http import HtmlResponse
+from scrapy.spiders import Spider
+
+from .request import HtmlRequest
 
 logger = logging.getLogger(__name__)
 

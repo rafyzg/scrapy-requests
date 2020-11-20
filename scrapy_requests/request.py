@@ -1,5 +1,6 @@
-from scrapy import Request
 import copy
+
+from scrapy import Request
 
 
 class HtmlRequest(Request):
