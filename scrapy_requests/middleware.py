@@ -1,9 +1,12 @@
 from scrapy.http import HtmlResponse
 from scrapy import signals
+from scrapy.spiders import Spider
 
 from requests_html import HTMLSession
 
 from .request import HtmlRequest
+import logging
+from typing import Union
 
 logger = logging.getLogger(__name__)
 
@@ -22,11 +25,16 @@ class RequestsMiddleware:
                                 signal=signals.spider_opened)
         return middleware
 
-    def spider_opened(self, spider: object) -> None:
+    def spider_opened(self, spider: Spider) -> None:
         """Open HTMLSession when spider starts"""
         self.session = HTMLSession()
 
-    def process_request(self, request, spider):
+    def spider_closed(self, spider: Spider) -> None:
+        self.session.close()
+
+    def process_request(self,
+                        request,
+                        spider: Spider) -> Union[None, HtmlResponse]:
         """Process a request using requests-html if applicable"""
 
         if not isinstance(request, HtmlRequest):
@@ -34,22 +42,24 @@ class RequestsMiddleware:
 
         page = self.session.get(request.url)
 
-        render = getattr(spider, 'render', False)
+        render = getattr(request, 'render', False)
         if not render:
             return HtmlResponse(
-                r.url,
+                url=request.url,
                 body=page.html.html,
-                enconding='utf-8',
-                request=request
+                request=request,
+                encoding='utf-8'
             )
 
-        params = getattr(spider, 'options', dict())
+        params = getattr(request, 'options', dict())
+        print(params)
 
         page.html.render(**params)
         request.meta.update({'page': page})
 
         return HtmlResponse(
-            r.url,
+            url=request.url,
             body=page.html.html,
-            request=request
+            request=request,
+            encoding='utf-8'
         )
