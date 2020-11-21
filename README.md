@@ -1,7 +1,4 @@
 # scrapy-requests
-Scrapy middleware to handle javascript pages using requests-html
-
-# scrapy-requests
 Scrapy middleware to handle javascript pages using requests-html.
 
 requests-html uses pyppeteer to load javascript pages, and handles user-agent specification for you.
