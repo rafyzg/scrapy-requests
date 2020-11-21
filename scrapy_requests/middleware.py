@@ -42,6 +42,8 @@ class RequestsMiddleware:
 
         page = self.session.get(request.url)
 
+        request.meta.update({'page': page})
+
         render = getattr(request, 'render', False)
         if not render:
             return HtmlResponse(
@@ -52,10 +54,8 @@ class RequestsMiddleware:
             )
 
         params = getattr(request, 'options', dict())
-        print(params)
 
         page.html.render(**params)
-        request.meta.update({'page': page})
 
         return HtmlResponse(
             url=request.url,
