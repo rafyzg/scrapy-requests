@@ -4,25 +4,25 @@ Scrapy middleware to handle javascript pages using requests-html.
 requests-html uses pyppeteer to load javascript pages, and handles user-agent specification for you.
 Using requests-html is very intuitive and simple. [Check out their documentation.](https://github.com/psf/requests-html "requests_html repo")
 
-### Requirements
+## Requirements
 - Python >= 3.6
 - Scrapy
 - requests-html
 
-### Installation
+## Installation
 ```
  pip install scrapy-requests
 ```
-### Configuration
+## Configuration
 Add RequestsMiddleware to the downloader middleware
 #### settings.py
 
-```python
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_requests.RequestsMiddleware': 800
-}
-```
-### Usage
+ ```python
+ DOWNLOADER_MIDDLEWARES = {
+     'scrapy_requests.RequestsMiddleware': 800
+ }
+ ```
+## Usage
 Use scrapy_requests.HtmlRequest instead of scrapy.Request
 ```python
 from scrapy_requests import HtmlRequest
@@ -36,7 +36,8 @@ def parse(self, response):
     page.html.render()
 ```
 
-#### additional settings
+## Additional settings
+
 If you would like the page to rendered by pyppeteer - pass `True` to the `render` key paramater.
 ```python
 yield HtmlRequest(url=url, callback=self.parse, render=True)
@@ -50,7 +51,7 @@ script = "document.body.querySelector('.btn').click();"
 yield HtmlRequest(url=url, callback=self.parse, render=True, options={sleep: 2, script: script})
 ```
 
-### Notes
+## Notes
 Please star this repo if you found it useful.
 
 Feel free to contribute and propose issues & additional features.
