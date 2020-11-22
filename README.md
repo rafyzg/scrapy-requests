@@ -1,4 +1,8 @@
 # scrapy-requests
+![PyPI](https://img.shields.io/pypi/v/scrapy-requests)
+[![Build Status](https://travis-ci.org/rafyzg/scrapy-requests.svg?branch=main)](https://travis-ci.org/rafyzg/scrapy-requests)
+![Codecov](https://img.shields.io/codecov/c/github/rafyzg/scrapy-requests)
+
 Scrapy middleware to handle javascript pages using requests-html.
 
 requests-html uses pyppeteer to load javascript pages, and handles user-agent specification for you.
