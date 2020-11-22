@@ -52,7 +52,7 @@ For example -
 You could set up a sleep timer before loading the page, and js script execution when loading the page - doing it this way:
 ```python
 script = "document.body.querySelector('.btn').click();"
-yield HtmlRequest(url=url, callback=self.parse, render=True, options={sleep: 2, script: script})
+yield HtmlRequest(url=url, callback=self.parse, render=True, options={'sleep': 2, 'script': script})
 ```
 
 ## Notes
