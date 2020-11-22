@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="scrapy-requests",  # Replace with your own username
-    version="0.1.0",
+    version="0.1.1",
     author="Refael Yzg",
     author_email="rafi.yzgeav@gmail.com",
     description="Scrapy with requests-html",
