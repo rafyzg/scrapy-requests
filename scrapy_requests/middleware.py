@@ -14,6 +14,10 @@ logger = logging.getLogger(__name__)
 class RequestsMiddleware:
     """Scrapy middleware handling requests using requests-html library"""
 
+    # Disabling pyppeteer logs to stdout
+    logging.getLogger('websockets').setLevel(20)
+    logging.getLogger('pyppeteer').setLevel(20)
+
     def __init__(self):
         self.session = None
 
