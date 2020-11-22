@@ -6,7 +6,7 @@ python:
 
 branches:
   only:
-    - master
+    - main
 
 install:
   - pip install -U pip tox codecov
