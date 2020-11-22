@@ -16,10 +16,12 @@ setuptools.setup(
     install_requires=[
         'scrapy>=1.0.0',
         'requests-html>=0.10.0',
+    ],
+    tests_require = [
+        'pytest>=6.1.0',
         'codecov',
-        'pytest',
-        'pytest-cov'
-    ]
+        'pytest-cov',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
