@@ -6,12 +6,8 @@ from scrapy import Request
 class HtmlRequest(Request):
     """ Scrapy Request subclass providing additional aruguments """
 
-    def __init__(self,
-                 render: bool = None,
-                 options: dict = None,
-                 *args,
-                 **kwargs):
-        """Initializing new Request-HTML reqest
+    def __init__(self, render: bool = None, options: dict = None, *args, **kwargs):
+        """Initializing new Request-HTML request
 
         Parameters:
         -----------
