@@ -6,7 +6,6 @@ import pytest
 import scrapy
 from scrapy.utils.reactor import install_reactor
 from scrapy.utils.test import get_crawler
-
 from scrapy_requests import HtmlRequest, RequestsMiddleware
 
 # Installing Asyncio Selector
@@ -32,7 +31,11 @@ async def test_crawl():
     nest_asyncio.apply()  # Required for async tests
     crawler = get_crawler(
         settings_dict={
-            "TWISTED_REACTOR": "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+            "TWISTED_REACTOR": "twisted.internet.asyncioreactor.AsyncioSelectorReactor",
+            "DEFAULT_SCRAPY_REQUESTS_SETTINGS": {
+                "verify": False,
+                "browser_args": ["--no-sandbox"],
+            },
         }
     )
     req1 = scrapy.Request(url="https://pythonclock.org/")
