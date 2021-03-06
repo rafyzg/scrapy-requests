@@ -1,3 +1,7 @@
+language: rust
+rust:
+  - stable
+  
 language: python
 matrix:
   include:
