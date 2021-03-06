@@ -3,14 +3,14 @@
 [![Build Status](https://travis-ci.org/rafyzg/scrapy-requests.svg?branch=main)](https://travis-ci.org/rafyzg/scrapy-requests)
 ![Codecov](https://img.shields.io/codecov/c/github/rafyzg/scrapy-requests)
 
-Scrapy middleware to handle javascript pages using requests-html.
+Scrapy middleware to asynchronously handle javascript pages using requests-html.
 
 requests-html uses pyppeteer to load javascript pages, and handles user-agent specification for you.
 Using requests-html is very intuitive and simple. [Check out their documentation.](https://github.com/psf/requests-html "requests_html repo")
 
 ## Requirements
 - Python >= 3.6
-- Scrapy
+- Scrapy >= 2.0
 - requests-html
 
 ## Installation
@@ -42,17 +42,27 @@ def parse(self, response):
 
 ## Additional settings
 
-If you would like the page to rendered by pyppeteer - pass `True` to the `render` key paramater.
+If you would like the page to be rendered by pyppeteer - pass `True` to the `render` key paramater.
 ```python
 yield HtmlRequest(url=url, callback=self.parse, render=True)
 ```
-You could choose a more speific requirement for the HTML object. 
+You could choose a more speific functionality for the HTML object. 
 
 For example - 
 You could set up a sleep timer before loading the page, and js script execution when loading the page - doing it this way:
 ```python
 script = "document.body.querySelector('.btn').click();"
 yield HtmlRequest(url=url, callback=self.parse, render=True, options={'sleep': 2, 'script': script})
+```
+
+You could pass default settings to requests-html session - specifying header, proxies, auth settings etc... 
+You do this by specifying an addtional variable in `settings.py`
+```python
+DEFAULT_SCRAPY_REQUESTS_SETTINGS = {
+    'verify': False, # Verifying SSL certificates
+    'mock_browser': True, # Mock browser user-agent
+    'browser_args': ['--no-sandbox', '--proxy-server=x.x.x.x:xxxx'], 
+}
 ```
 
 ## Notes
