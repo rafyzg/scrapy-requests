@@ -5,8 +5,10 @@ from requests_html import AsyncHTMLSession
 from scrapy import signals
 from scrapy.http import HtmlResponse
 from scrapy.spiders import Spider
+from scrapy.utils.project import get_project_settings
 
 from .request import HtmlRequest
+
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +22,9 @@ class RequestsMiddleware:
 
     def __init__(self):
         self.session = None
+        self.settings = get_project_settings().get(
+            "DEFAULT_SCRAPY_REQUESTS_SETTINGS", {}
+        )
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -31,9 +36,18 @@ class RequestsMiddleware:
 
     def spider_opened(self, spider: Spider) -> None:
         """Open HTMLSession when spider starts"""
-        self.session = AsyncHTMLSession()
+        try:
+            self.session = AsyncHTMLSession(**self.settings)
+        except TypeError:
+            self.session = AsyncHTMLSession()
+            raise AttributeError(
+                "DEFAULT_SCRAPY_REQUESTS_SETTINGS is not "
+                + "aligned with requests-html session settings. \n"
+                + "Please check www.github.com/psf/requests-html/blob/026c4e5217cfc8347614148aab331d81402f596b/requests_html.py#L759"
+            )
 
     async def spider_closed(self, spider: Spider) -> None:
+        """Close HTMLSession when spider closes"""
         await self.session.close()
 
     async def process_request(
