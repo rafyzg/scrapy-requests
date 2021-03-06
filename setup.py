@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/rafyzg/scrapy-requests",
     packages=setuptools.find_packages(),
     install_requires=[
-        'scrapy>=1.0.0',
+        'scrapy>=2.0.0',
         'requests-html>=0.10.0',
     ],
     tests_require = [
