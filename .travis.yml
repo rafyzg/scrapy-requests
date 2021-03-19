@@ -5,7 +5,7 @@ matrix:
       env: 
         - TOXENV=py36
       before_install:
-        - python -m pip install --upgrade pip
+        - pip install virtualenv --upgrade
     - python: 3.7
       env: TOXENV=py37
     - python: 3.8
@@ -19,7 +19,6 @@ branches:
 
 install:
   - pip install -U pip tox codecov
-
 script: tox
 
 after_success:
