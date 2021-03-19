@@ -18,10 +18,13 @@ Using requests-html is very intuitive and simple. [Check out their documentation
  pip install scrapy-requests
 ```
 ## Configuration
-Add RequestsMiddleware to the downloader middleware
+Make twisted use Asyncio event loop 
+And add RequestsMiddleware to the downloader middleware
 #### settings.py
 
  ```python
+ TWISTED_REACTOR = 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'
+
  DOWNLOADER_MIDDLEWARES = {
      'scrapy_requests.RequestsMiddleware': 800
  }
