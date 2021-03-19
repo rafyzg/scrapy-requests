@@ -14,13 +14,15 @@ setuptools.setup(
     url="https://github.com/rafyzg/scrapy-requests",
     packages=setuptools.find_packages(),
     install_requires=[
-        'scrapy>=1.0.0',
+        'scrapy>=2.0.0',
         'requests-html>=0.10.0',
     ],
     tests_require = [
         'pytest>=6.1.0',
         'codecov',
         'pytest-cov',
+        'pytest-asyncio',
+        'nest_asyncio',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -30,6 +32,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     python_requires='>=3.6',
 )

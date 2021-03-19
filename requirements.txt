@@ -1,5 +1,2 @@
-scrapy>=1.0.0
+scrapy>=2.0.0
 requests-html>=0.10.0
-codecov==2.1.10
-pytest==6.1.2
-pytest-cov==2.10.1

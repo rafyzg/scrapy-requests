@@ -2,11 +2,16 @@ language: python
 matrix:
   include:
     - python: 3.6
-      env: TOXENV=py36
+      env: 
+        - TOXENV=py36
+      before_install:
+        - pip install virtualenv --upgrade
     - python: 3.7
       env: TOXENV=py37
     - python: 3.8
       env: TOXENV=py38
+    - python: 3.9
+      env: TOXENV=py39
 
 branches:
   only:
@@ -14,7 +19,6 @@ branches:
 
 install:
   - pip install -U pip tox codecov
-
 script: tox
 
 after_success:
