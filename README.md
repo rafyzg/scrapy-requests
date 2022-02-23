@@ -2,6 +2,8 @@
 ![PyPI](https://img.shields.io/pypi/v/scrapy-requests)
 [![Build Status](https://travis-ci.org/rafyzg/scrapy-requests.svg?branch=main)](https://travis-ci.org/rafyzg/scrapy-requests)
 ![Codecov](https://img.shields.io/codecov/c/github/rafyzg/scrapy-requests)
+[![Downloads](https://pepy.tech/badge/scrapy-requests)](https://pepy.tech/project/scrapy-requests)
+
 
 Scrapy middleware to asynchronously handle javascript pages using requests-html.
 
@@ -36,19 +38,19 @@ from scrapy_requests import HtmlRequest
 
 yield HtmlRequest(url=url, callback=self.parse)
 ```
+
 The requests will be handled by requests_html, and the request will add an additional meta varialble `page` containing the HTML object.
 ```python
 def parse(self, response):
     page = response.request.meta['page']
-    page.html.render()
 ```
-
-## Additional settings
 
 If you would like the page to be rendered by pyppeteer - pass `True` to the `render` key paramater.
 ```python
 yield HtmlRequest(url=url, callback=self.parse, render=True)
 ```
+
+## Additional settings
 You could choose a more speific functionality for the HTML object. 
 
 For example - 
